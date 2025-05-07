@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-import "./globals.css";
+import "./global.css";
 import { TanstackQueryProvider } from "@/providers/query-provider";
 import { Toaster } from "sonner";
 
