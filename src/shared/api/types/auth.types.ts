@@ -5,7 +5,6 @@ export interface AuthForm {
 
 export interface MailForm {
 	email: string,
-    code: number
 };
 
 export interface IAuthResponse {
