@@ -1,6 +1,6 @@
 "use client"
 
-import { AuthHeader } from "@/features/auth/components/auth-header";
+import { AuthHeader } from "@/widgets/auth/auth-header";
 
 
 interface AuthLayoutProps {
