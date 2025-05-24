@@ -1,6 +1,6 @@
 import { JwtPayload } from "@api-types/jwt-payload.types";
 
-export const parseJw = (token: string): JwtPayload | null =>  {
+export const parseJwt = (token: string): JwtPayload | null =>  {
   try {
     const base64Url = token.split('.')[1];
     if (!base64Url) throw new Error('Invalid JWT format');
