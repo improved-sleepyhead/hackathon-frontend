@@ -6,7 +6,7 @@ import { errorCatch } from '@/shared/api/errors/error'
 
 
 const options: CreateAxiosDefaults = {
-	baseURL: process.env.BASE_URL,
+	baseURL: "https://yamata-no-orochi.nktkln.com/auth/auth",
 	headers: {
 		'Content-Type': 'application/json'
 	},

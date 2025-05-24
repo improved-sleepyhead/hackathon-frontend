@@ -1,6 +1,6 @@
 export interface AuthForm {
 	email: string,
-    code: number
+    code: string,
 };
 
 export interface MailForm {

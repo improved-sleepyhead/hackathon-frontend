@@ -49,9 +49,9 @@ export const EmailEnterCard = () => {
         });
         
         toast.promise(promise, {
-            loading: "Регистрация аккаунта...",
-            success: "Успешная регистрация!",
-            error: (error) => error?.response?.data?.message || "Ошибка регистрации",
+            loading: "Отправка кода на почту...",
+            success: "Код успешно отправлен!",
+            error: (error) => error?.response?.data?.message || "Ошибка отправки кода на почту",
         });
     };
 

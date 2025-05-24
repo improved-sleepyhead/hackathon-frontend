@@ -1,7 +1,9 @@
+import { LoginCard } from "@/features/auth/components/login-card";
+
 const MarketingPage = () => {
   return (
     <div>
-      page
+      <LoginCard />
     </div>
   );
 };
