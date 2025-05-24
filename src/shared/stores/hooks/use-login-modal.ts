@@ -1,6 +1,6 @@
 import { useLoginModalStore } from "../login-modal-store";
 
-export const useLoginModalModal = () => {
+export const useLoginModal = () => {
   const { isOpen, setIsOpen } = useLoginModalStore();
 
   const open = () => setIsOpen(true);

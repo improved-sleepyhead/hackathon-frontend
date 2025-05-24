@@ -24,7 +24,11 @@ const formSchema = z.object({
     code: z.string().min(1, "Необходимое поле"),
 });
 
-export const LoginCard = () => {
+interface LoginFormProps {
+    onCancel?: () => void;
+};
+
+export const LoginForm = ({ onCancel }: LoginFormProps) => {
     const router = useRouter();
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -39,6 +43,7 @@ export const LoginCard = () => {
         const promise = authService.login(values as AuthForm)
             .then(() => {
             form.reset();
+            onCancel?.();
             router.push("/");
         });
     
@@ -86,9 +91,22 @@ export const LoginCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" disabled={isLoading} size="lg" className="w-full">
-                            {isLoading ? "Загрузка..." : "Войти"}
-                        </Button>
+                        <div className="flex items-center justify-between">
+                            {onCancel && (
+                                <Button
+                                    type="button"
+                                    size="lg"
+                                    variant="secondary"
+                                    onClick={onCancel}
+                                    disabled={isLoading}
+                                >
+                                    Отмена
+                                </Button>
+                            )}
+                            <Button type="submit" disabled={isLoading} size="lg" className="w-full">
+                                {isLoading ? "Загрузка..." : "Войти"}
+                            </Button>
+                        </div>
                     </form>
                 </Form>
             </CardContent>
