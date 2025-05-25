@@ -33,7 +33,7 @@ interface LoginFormProps {
 
 export const LoginForm = ({ onCancel }: LoginFormProps) => {
     const router = useRouter();
-    const { email } = useUserEmail();
+    const { email, clearEmail } = useUserEmail();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -48,6 +48,7 @@ export const LoginForm = ({ onCancel }: LoginFormProps) => {
             .then(() => {
             form.reset();
             onCancel?.();
+            clearEmail();
             router.push("/");
         });
     

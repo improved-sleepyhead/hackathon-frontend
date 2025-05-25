@@ -38,7 +38,7 @@ export const authService = {
     
 	async getNewTokens() {
 		const response = await axiosClassic.get<IAuthResponse>(
-			'/refresh-token'
+			'/refresh_token'
 		)
 
 		if (response.data.access_token) saveTokenStorage(response.data.access_token)

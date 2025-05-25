@@ -13,15 +13,14 @@ import { useRouter } from "next/navigation";
 
 import { Separator } from "./kit/separator";
 import { authService } from "@/shared/api/services/auth.service";
-import { useUserEmail } from "@/shared/stores/hooks/use-user-email";
+import { getUserEmail } from "../api/services/get-current-user.service";
 
 export const UserButton = () => {
     const router = useRouter();
-    const { email, clearEmail } = useUserEmail();
+    const email = getUserEmail();
 
     const onLogout = () => {
         const promise = authService.logout().then(() => {
-            clearEmail();
             router.push("/login");
         });
 
@@ -32,7 +31,6 @@ export const UserButton = () => {
         });
     };
     
-
     const avatarFallback = email?.charAt(0).toUpperCase() ?? "?";
     const displayEmail = email ?? "Гость";
     const accessLevel = email ? "Полный доступ" : "Макимум 20 генераций";
