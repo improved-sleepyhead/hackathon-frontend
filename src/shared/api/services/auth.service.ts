@@ -1,4 +1,4 @@
-import { axiosClassic } from '@/shared/api/interceptors/interceptors';
+import { axiosClassic, axiosWithAuth } from '@/shared/api/interceptors/interceptors';
 import { AuthForm, IAuthResponse, IMailResponse, MailForm } from '@/shared/api/types/auth.types';
 
 import { removeFromStorage, saveTokenStorage } from './auth-token.service'
@@ -10,17 +10,19 @@ export const authService = {
 			data
 		)
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.access_token) saveTokenStorage(response.data.access_token)
+        console.log('Ответ от сервера:', response);
+        console.log('Access token:', response.data.access_token);
 
 		return response
 	},
 
     async guestLogin() {
-		const response = await axiosClassic.post<IAuthResponse>(
+		const response = await axiosClassic.get<IAuthResponse>(
 			'/verify_guest',
 		)
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.access_token) saveTokenStorage(response.data.access_token)
 
 		return response
 	},
@@ -35,17 +37,17 @@ export const authService = {
 	},
     
 	async getNewTokens() {
-		const response = await axiosClassic.post<IAuthResponse>(
+		const response = await axiosClassic.get<IAuthResponse>(
 			'/refresh-token'
 		)
 
-		if (response.data.accessToken) saveTokenStorage(response.data.accessToken)
+		if (response.data.access_token) saveTokenStorage(response.data.access_token)
 
 		return response
 	},
 
 	async logout() {
-		const response = await axiosClassic.post<boolean>('/logout')
+		const response = await axiosWithAuth.get<boolean>('/logout')
 
 		if (response.data) removeFromStorage()
 

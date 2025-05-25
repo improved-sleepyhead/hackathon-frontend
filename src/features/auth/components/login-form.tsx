@@ -18,6 +18,9 @@ import {
 } from "@/shared/ui/kit/form";
 import { AuthForm } from "@/shared/api/types/auth.types";
 import { authService } from "@/shared/api/services/auth.service";
+import { cn } from "@/lib/utils";
+import { useUserEmail } from "@/shared/stores/hooks/use-user-email";
+import { Separator } from "@/shared/ui/kit/separator";
 
 const formSchema = z.object({
     email: z.string().trim().min(1, "Необходимое поле").email("Неверный email"),
@@ -30,11 +33,12 @@ interface LoginFormProps {
 
 export const LoginForm = ({ onCancel }: LoginFormProps) => {
     const router = useRouter();
+    const { email } = useUserEmail();
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-          email: "",
+          email: email ?? "",
           code: "",
         },
     });
@@ -57,13 +61,16 @@ export const LoginForm = ({ onCancel }: LoginFormProps) => {
     const isLoading = form.formState.isSubmitting;
 
     return (
-        <Card className="w-full h-full md:w-[487px] border-none shadow-none">
+        <Card className="w-full h-full md:w-[487px] border-none shadow-none relative">
             <CardHeader className="flex items-center justify-center text-center p-7">
                 <CardTitle className="text-2xl">Введите данные для входа</CardTitle>
                 <CardDescription>
-                    Проверьте Вашу почту! Письмо с кодом подтверждения было направлено по указанному.
+                    Проверьте Вашу почту! Письмо с кодом подтверждения было направлено по указанному адресу.
                 </CardDescription>
             </CardHeader>
+            <div className="px-7 mb-7">
+                <Separator />
+            </div>
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -73,7 +80,7 @@ export const LoginForm = ({ onCancel }: LoginFormProps) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input {...field} type="email" placeholder="Введите email" />
+                                        <Input {...field} type="email" placeholder="Введите email" autoFocus={false}/>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -85,24 +92,23 @@ export const LoginForm = ({ onCancel }: LoginFormProps) => {
                             render={({ field }) => (
                                 <FormItem>
                                     <FormControl>
-                                        <Input {...field} type="code" placeholder="Введите код с почты" />
+                                        <Input {...field} type="code" placeholder="Введите код с почты" autoFocus={true}/>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <div className="flex items-center justify-between">
-                            {onCancel && (
-                                <Button
-                                    type="button"
-                                    size="lg"
-                                    variant="secondary"
-                                    onClick={onCancel}
-                                    disabled={isLoading}
-                                >
-                                    Отмена
-                                </Button>
-                            )}
+                        <div className="flex items-center w-full gap-x-4 h-full">
+                            <Button
+                                type="button"
+                                size="lg"
+                                variant="secondary"
+                                onClick={onCancel}
+                                disabled={isLoading}
+                                className={cn(!onCancel && "invisible", "w-full")}
+                            >
+                                Отмена
+                            </Button>
                             <Button type="submit" disabled={isLoading} size="lg" className="w-full">
                                 {isLoading ? "Загрузка..." : "Войти"}
                             </Button>

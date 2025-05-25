@@ -8,7 +8,7 @@ export interface MailForm {
 };
 
 export interface IAuthResponse {
-	accessToken: string
+	access_token: string
 };
 
 export interface IMailResponse {

@@ -4,7 +4,6 @@ import { z } from "zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { Button } from "@/shared/ui/kit/button";
@@ -25,14 +24,19 @@ import {
 } from "@/shared/ui/kit/form";
 import { authService } from "@/shared/api/services/auth.service";
 import { MailForm } from "@/shared/api/types/auth.types";
+import { useLoginModal } from "@/shared/stores/hooks/use-login-modal";
+import { Separator } from "@/shared/ui/kit/separator";
+import { useUserEmail } from "@/shared/stores/hooks/use-user-email";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     email: z.string().email("Неверный email"),
 });
 
 export const EmailEnterCard = () => {
+    const { open } = useLoginModal();
+    const { setEmail } = useUserEmail();
     const router = useRouter();
-
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -40,12 +44,26 @@ export const EmailEnterCard = () => {
         },
     });
 
+    const onGuestSubmit = async () => {
+            const promise = authService.guestLogin()
+                .then(() => {
+                router.push("/");
+            });
+        
+            toast.promise(promise, {
+                loading: "Вход в систему...",
+                success: "Успешный вход!",
+                error: (error) => error?.response?.data?.message || "Ошибка входа",
+            });
+        };
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         const promise = authService
             .main(values as MailForm)
                 .then(() => {
-            form.reset();
-            router.push("/");
+                    setEmail(values.email);
+                    form.reset();
+                    open();
         });
         
         toast.promise(promise, {
@@ -59,7 +77,7 @@ export const EmailEnterCard = () => {
 
     return (
         <Card className="w-full h-full md:w-[487px] border-none shadow-none">
-            <CardHeader className="flex items-center justify-center text-center p-7">
+            <CardHeader className="flex items-center justify-center text-center">
                 <CardTitle className="text-2xl">Регистрация</CardTitle>
                 <CardDescription>
                     Регистрируясь, вы принимаете нашу {" "}
@@ -72,6 +90,9 @@ export const EmailEnterCard = () => {
                     </Link>
                 </CardDescription>
             </CardHeader>
+            <div className="px-7 mb-7">
+                <Separator />
+            </div>
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -90,6 +111,15 @@ export const EmailEnterCard = () => {
                         <Button type="submit" disabled={isLoading} size="lg" className="w-full">
                             {isLoading ? "Загрузка..." : "Зарегистрироваться"}
                         </Button>
+                        <div className="px-7 mb-7">
+                            <Separator />
+                        </div>
+                        <CardContent className="flex items-center text-sm">
+                            <Button variant="ghost" className="hover:bg-transparent" onClick={onGuestSubmit} type="button">
+                                <span className="text-blue-700 px-2 text-sm">Войти как гость</span>
+                            </Button>
+                            <p>(Количество генераций контента ограничено)</p>
+                        </CardContent>
                     </form>
                 </Form>
             </CardContent>
