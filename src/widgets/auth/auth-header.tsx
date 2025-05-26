@@ -8,7 +8,7 @@ export const AuthHeader = () => {
         <nav className="flex justify-between items-center">
             <Logo />
             <div className="flex items-center justify-end gap-x-4">
-                <Button variant="secondary" className="p-5" asChild>
+                <Button variant="secondary" className="p-5 bg-white hover:bg-white" asChild>
                     <Link href="/">
                         <ArrowLeft /> На главную
                     </Link>

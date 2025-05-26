@@ -18,4 +18,4 @@ export const parseJwt = (token: string): JwtPayload | null =>  {
     console.error('JWT parsing error:', error);
     return null;
   }
-}
+};
