@@ -3,7 +3,7 @@
 import { Heart, Pause, Play } from 'lucide-react'
 import { useState } from 'react'
 
-export default function MusicPlayer() {
+export const MusicPlayer = () => {
 	const [isPaused, setIsPaused] = useState(false)
 
 	return (
