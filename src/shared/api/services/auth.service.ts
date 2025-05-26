@@ -1,7 +1,8 @@
 import { axiosClassic, axiosWithAuth } from '@/shared/api/interceptors/interceptors';
-import { AuthForm, IAuthResponse, IMailResponse, MailForm } from '@/shared/api/types/auth.types';
+import { AuthForm, IAuthResponse, IMailResponse, IUser, MailForm } from '@/shared/api/types/auth.types';
 
 import { removeFromStorage, saveTokenStorage } from './auth-token.service'
+import { QueryClient } from '@tanstack/react-query';
 
 export const authService = {
 	async login(data: AuthForm) {
@@ -11,8 +12,6 @@ export const authService = {
 		)
 
 		if (response.data.access_token) saveTokenStorage(response.data.access_token)
-        console.log('Ответ от сервера:', response);
-        console.log('Access token:', response.data.access_token);
 
 		return response
 	},
@@ -46,11 +45,18 @@ export const authService = {
 		return response
 	},
 
+	async getCurrentUser(): Promise<IUser> {
+		const response = await axiosWithAuth.get<IUser>('/profile');
+		return response.data;
+	},
+
 	async logout() {
 		const response = await axiosWithAuth.get<boolean>('/logout')
 
-		if (response.data) removeFromStorage()
+		if (response.status === 200) {
+			removeFromStorage();
+		}
 
 		return response
-	}
+	},
 };

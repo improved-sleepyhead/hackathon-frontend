@@ -13,11 +13,14 @@ import { useRouter } from "next/navigation";
 
 import { Separator } from "./kit/separator";
 import { authService } from "@/shared/api/services/auth.service";
-import { getUserEmail } from "../api/services/get-current-user.service";
+import { useCurrentUser } from "@/shared/api/hooks/use-current-user";
+import { Spinner } from "./spinner";
 
 export const UserButton = () => {
     const router = useRouter();
-    const email = getUserEmail();
+    const { currentUser, isLoading, isAuthenticated } = useCurrentUser();
+
+    const email = currentUser?.email;
 
     const onLogout = () => {
         const promise = authService.logout().then(() => {
@@ -34,6 +37,13 @@ export const UserButton = () => {
     const avatarFallback = email?.charAt(0).toUpperCase() ?? "?";
     const displayEmail = email ?? "Гость";
     const accessLevel = email ? "Полный доступ" : "Макимум 20 генераций";
+
+    if (isLoading) return (
+        <div className="flex items-center justify-center">
+            <Spinner />
+        </div>
+    )
+    if (!isAuthenticated) return null
 
     return (
         <DropdownMenu modal={false}>

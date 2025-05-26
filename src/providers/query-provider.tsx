@@ -18,7 +18,6 @@ export function TanstackQueryProvider({ children }: PropsWithChildren) {
 	return (
 		<QueryClientProvider client={client}>
 			{children}
-			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>
 	)
 }
