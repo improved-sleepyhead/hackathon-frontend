@@ -6,7 +6,7 @@ export default function ToolsLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<section className="min-h-screen">
+		<section className="min-h-screen flex items-center w-full">
 			<ToolsNavigation />
 			{children}
 		</section>
