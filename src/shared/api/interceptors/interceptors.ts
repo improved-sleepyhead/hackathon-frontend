@@ -1,12 +1,14 @@
 import axios, { type CreateAxiosDefaults } from 'axios'
 
-import { getAccessToken, removeFromStorage } from '@/shared/api/services/auth-token.service'
+import {
+	getAccessToken,
+	removeFromStorage
+} from '@/shared/api/services/auth-token.service'
 import { authService } from '@/shared/api/services/auth.service'
 import { errorCatch } from '@/shared/api/errors/error'
 
-
 const options: CreateAxiosDefaults = {
-	baseURL: "https://yamata-no-orochi.nktkln.com/auth/auth",
+	baseURL: 'https://yamata-no-orochi.nktkln.com/auth/auth',
 	headers: {
 		'Content-Type': 'application/json'
 	},

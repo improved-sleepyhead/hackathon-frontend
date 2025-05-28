@@ -1,16 +1,16 @@
-import { Header } from "@/widgets/marketing/header";
+import { Header } from '@/widgets/marketing/header'
 
 interface MainLayoutProps {
-    children: React.ReactNode;
+	children: React.ReactNode
 }
 
 const MainLayout = ({ children }: MainLayoutProps) => {
-    return ( 
-        <main className="flex flex-col items-center bg-orange-main">
-            <Header />      
-            {children}
-        </main>
-     );
-};
- 
-export default MainLayout;
+	return (
+		<main className="bg-orange-main flex flex-col items-center">
+			<Header />
+			{children}
+		</main>
+	)
+}
+
+export default MainLayout

@@ -1,11 +1,11 @@
-import { Spinner } from "@/shared/ui/spinner";
+import { Spinner } from '@/shared/ui/spinner'
 
 const MainLoading = () => {
-    return (
-        <div className="h-full flex items-center justify-center">
-            <Spinner size="lg"/>
-        </div>
-    );
-};
+	return (
+		<div className="flex h-full items-center justify-center">
+			<Spinner size="lg" />
+		</div>
+	)
+}
 
-export default MainLoading;
+export default MainLoading

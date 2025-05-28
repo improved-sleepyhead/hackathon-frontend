@@ -1,4 +1,4 @@
 export interface JwtPayload {
-  [key: string]: any;
-  email?: string;
+	[key: string]: any
+	email?: string
 }

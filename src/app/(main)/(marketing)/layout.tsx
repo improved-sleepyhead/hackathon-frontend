@@ -1,15 +1,13 @@
 interface MarketingLayoutProps {
-    children: React.ReactNode;
+	children: React.ReactNode
 }
 
 const MarketingLayout = ({ children }: MarketingLayoutProps) => {
-    return ( 
-        <main className="min-h-screen bg-orange-main w-full relative">
-            <div className="flex flex-col items-cente w-full">
-                {children}
-            </div>
-        </main>
-     );
+	return (
+		<main className="bg-orange-main relative min-h-screen w-full">
+			<div className="items-cente flex w-full flex-col">{children}</div>
+		</main>
+	)
 }
- 
-export default MarketingLayout;
+
+export default MarketingLayout

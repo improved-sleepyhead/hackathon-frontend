@@ -2,79 +2,62 @@ import { Download, RefreshCw, Award } from 'lucide-react'
 
 export const LetterPreview = () => {
 	return (
-		<div
-			className="relative w-full max-w-4xl mx-auto rounded-md 
-                  shadow-[0_4px_30px_rgba(0,0,0,0.25)] border border-dashed border-primary/30
-                  group transform transition-all duration-300 hover:shadow-xl
-                  min-h-[320px] h-auto"
-		>
-			<div
-				className="bg-amber-50/90 backdrop-blur-sm px-6 py-8 
-                     relative before:absolute before:inset-0 before:bg-noise-texture
-                     h-[500px] flex flex-col"
-			>
-				<div
-					className="flex items-center gap-3 border-b border-primary/40 pb-3 
-                       min-h-[56px]"
-				>
-					<Award className="w-6 h-6 text-primary" />
-					<h2
-						className="font-mono text-lg tracking-wider uppercase 
-                        bg-gradient-to-r from-primary to-amber-900 bg-clip-text text-transparent"
-					>
+		<div className="group relative mx-auto h-auto min-h-[320px] w-full max-w-4xl transform rounded-md border border-dashed border-primary/30 shadow-[0_4px_30px_rgba(0,0,0,0.25)] transition-all duration-300 hover:shadow-xl">
+			<div className="before:bg-noise-texture relative flex h-[500px] flex-col bg-amber-50/90 px-6 py-8 backdrop-blur-sm before:absolute before:inset-0">
+				<div className="flex min-h-[56px] items-center gap-3 border-b border-primary/40 pb-3">
+					<Award className="h-6 w-6 text-primary" />
+					<h2 className="bg-gradient-to-r from-primary to-amber-900 bg-clip-text font-mono text-lg uppercase tracking-wider text-transparent">
 						Секторный приказ №42
 					</h2>
 				</div>
-				<div className="flex-1 overflow-y-auto pr-4 custom-scrollbar mt-4">
-					<div className="font-serif text-justify italic space-y-4 pt-4">
+				<div className="custom-scrollbar mt-4 flex-1 overflow-y-auto pr-4">
+					<div className="space-y-4 pt-4 text-justify font-serif italic">
 						<p className="indent-8">
-							Товарищи бойцы! В суровых условиях зимнего наступления, когда враг
-							пытается сломить нашу волю артобстрелами, мы должны помнить:
-							каждый окоп — крепость, каждый солдат — неприступная стена.
+							Товарищи бойцы! В суровых условиях зимнего
+							наступления, когда враг пытается сломить нашу волю
+							артобстрелами, мы должны помнить: каждый окоп —
+							крепость, каждый солдат — неприступная стена.
 							Координаты сектора 58-42 требуют...
 						</p>
 
 						<div
-							className={`space-y-4 transition-all duration-500 
-                            opacity-70`}
+							className={`space-y-4 opacity-70 transition-all duration-500`}
 						>
 							<p className="indent-8">
-								Подкрепление с 307-й дивизией ожидается к 04:00. Под прикрытием
-								тумана осуществить переброску боеприпасов на вторую линию
-								обороны... Подкрепление с 307-й дивизией ожидается к 04:00. Под
-								прикрытием тумана осуществить переброску боеприпасов на вторую
-								линию обороны... Подкрепление с 307-й дивизией ожидается к
-								04:00. Под прикрытием тумана осуществить переброску боеприпасов
-								на вторую линию обороны... Подкрепление с 307-й дивизией
-								ожидается к 04:00. Под прикрытием тумана осуществить переброску
-								боеприпасов на вторую линию обороны... Подкрепление с 307-й
-								дивизией ожидается к 04:00. Под прикрытием тумана осуществить
-								переброску боеприпасов на вторую линию обороны... Подкрепление с
-								307-й дивизией ожидается к 04:00. Под прикрытием тумана
-								осуществить переброску боеприпасов на вторую линию обороны...
+								Подкрепление с 307-й дивизией ожидается к 04:00.
+								Под прикрытием тумана осуществить переброску
+								боеприпасов на вторую линию обороны...
+								Подкрепление с 307-й дивизией ожидается к 04:00.
+								Под прикрытием тумана осуществить переброску
+								боеприпасов на вторую линию обороны...
+								Подкрепление с 307-й дивизией ожидается к 04:00.
+								Под прикрытием тумана осуществить переброску
+								боеприпасов на вторую линию обороны...
+								Подкрепление с 307-й дивизией ожидается к 04:00.
+								Под прикрытием тумана осуществить переброску
+								боеприпасов на вторую линию обороны...
+								Подкрепление с 307-й дивизией ожидается к 04:00.
+								Под прикрытием тумана осуществить переброску
+								боеприпасов на вторую линию обороны...
+								Подкрепление с 307-й дивизией ожидается к 04:00.
+								Под прикрытием тумана осуществить переброску
+								боеприпасов на вторую линию обороны...
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div
-				className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 
-                     bg-amber-50/80 backdrop-blur-sm px-4 py-1 rounded-full 
-                     border border-primary/20 shadow-sm"
-			>
+			<div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 rounded-full border border-primary/20 bg-amber-50/80 px-4 py-1 shadow-sm backdrop-blur-sm">
 				<button className="flex items-center gap-2 text-sm hover:text-primary">
-					<RefreshCw className="w-4 h-4" />
+					<RefreshCw className="h-4 w-4" />
 					Перегенерация
 				</button>
-				<div className="h-6 w-px bg-primary/20 mx-2" />
+				<div className="mx-2 h-6 w-px bg-primary/20" />
 				<button className="hover:text-primary">
-					<Download className="w-5 h-5" />
+					<Download className="h-5 w-5" />
 				</button>
 			</div>
-			<span
-				className="absolute bottom-4 right-4 text-[9px] uppercase 
-                      tracking-widest text-primary/30 font-mono"
-			>
+			<span className="absolute bottom-4 right-4 font-mono text-[9px] uppercase tracking-widest text-primary/30">
 				Generated by SELPO
 			</span>
 		</div>

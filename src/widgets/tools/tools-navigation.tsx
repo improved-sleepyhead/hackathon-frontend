@@ -1,12 +1,12 @@
 'use client'
 
+import Link from 'next/link'
+import { AudioLines, Scale3d, Image } from 'lucide-react'
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger
 } from '@/shared/ui/kit/hover-card'
-import { AudioLines, Scale3d, Image } from 'lucide-react'
-import Link from 'next/link'
 
 const TOOLS = [
 	{
@@ -31,11 +31,7 @@ const TOOLS = [
 
 export const ToolsNavigation = () => {
 	return (
-		<div
-			className="flex fixed left-1/2 bottom-4 -translate-x-1/2 
-                   z-50 bg-background/80 backdrop-blur-sm 
-                   rounded-lg border p-1.5 gap-2 shadow-lg"
-		>
+		<div className="fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-2 rounded-lg border bg-background/80 p-1.5 shadow-lg backdrop-blur-sm">
 			{TOOLS.map((tool, id) => (
 				<DelayedTooltip {...tool} key={id} />
 			))}
@@ -57,12 +53,12 @@ export const DelayedTooltip = ({
 			<HoverCardTrigger asChild>
 				<Link
 					href={link}
-					className="p-3 flex items-center justify-center text-primary hover:-translate-y-1 transition-all"
+					className="flex items-center justify-center p-3 text-primary transition-all hover:-translate-y-1"
 				>
 					{icon}
 				</Link>
 			</HoverCardTrigger>
-			<HoverCardContent side="bottom">{tooltip}</HoverCardContent>
+			<HoverCardContent side="top">{tooltip}</HoverCardContent>
 		</HoverCard>
 	)
 }

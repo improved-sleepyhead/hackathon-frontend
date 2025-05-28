@@ -15,9 +15,5 @@ export function TanstackQueryProvider({ children }: PropsWithChildren) {
 		})
 	)
 
-	return (
-		<QueryClientProvider client={client}>
-			{children}
-		</QueryClientProvider>
-	)
+	return <QueryClientProvider client={client}>{children}</QueryClientProvider>
 }
