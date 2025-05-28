@@ -6,7 +6,7 @@ interface MainLayoutProps {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
 	return (
-		<main className="bg-orange-main flex flex-col items-center">
+		<main className="flex flex-col items-center">
 			<Header />
 			{children}
 		</main>

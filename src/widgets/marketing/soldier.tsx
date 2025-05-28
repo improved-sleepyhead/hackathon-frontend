@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export const Soldier = () => {
 	return (
-		<div className="relative h-screen w-full">
+		<div className="bg-orange-main relative h-screen w-full">
 			<Image
 				src="/soldier.png"
 				alt="Фон"

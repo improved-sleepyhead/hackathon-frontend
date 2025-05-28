@@ -1,18 +1,22 @@
 import { Footer } from '@/widgets/marketing/footer'
-import { Galary } from '@/widgets/marketing/galary'
+import { Gallery } from '@/widgets/marketing/gallery'
 import { Music } from '@/widgets/marketing/music'
 import { Soldier } from '@/widgets/marketing/soldier'
 import { WhiteBlock } from '@/widgets/marketing/white-block'
 
 const MarketingPage = () => {
 	return (
-		<div className="bg-orange-main flex w-full flex-col items-center">
+		<div className="-mt-2 flex w-full flex-col items-center">
 			<Soldier />
+			<div className="flex w-full flex-col items-center">
 			<WhiteBlock />
-			<Galary />
+			<Gallery />
+			</div>
+			<div className="flex w-full flex-col items-center bg-dark-main">
 			<Music />
 			{/* <Devs /> */}
 			<Footer />
+			</div>
 		</div>
 	)
 }

@@ -17,7 +17,7 @@ export const Header = () => {
 	const isDesktop = useMedia('(min-width: 1024px)', true)
 
 	return (
-		<div className="flex h-full w-full items-center justify-between rounded-2xl bg-transparent px-6 pb-4 pt-4 text-white lg:px-20">
+		<div className="bg-orange-main flex h-full w-full items-center justify-between bg-transparent px-6 pb-6 pt-4 text-white lg:px-20">
 			<div className="hidden lg:block">
 				<Logo />
 			</div>
