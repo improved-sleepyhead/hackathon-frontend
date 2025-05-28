@@ -2,28 +2,32 @@ import { Logo } from '@/shared/ui/logo'
 
 export const Footer = () => {
 	return (
-		<footer className="bg-dark-main px-4 py-6 sm:px-6 lg:px-8">
-			<div className="flex w-full flex-row items-center justify-between gap-8">
-				<div className="flex items-center justify-center">
+		<footer className="bg-dark-main flex flex-col items-center px-4 py-6">
+			<div className="flex w-full items-center gap-x-4">
+				<div className="flex items-end justify-center">
 					<Logo />
 				</div>
-				{/* Правая колонка - текст соглашения */}
-				<div className="space-y-4">
-					<p className="text-sm text-gray-600">
-						Какое-то то пользовательское соглашение
+				<div className="w-5/6 space-y-1">
+					<p className="text-sm text-neutral-400">
+						Пользовательское уведомление о точности исторических
+						данных
 					</p>
-					<p className="text-sm text-gray-500">
-						Lorem Ipsum is simply dummy text of the printing and
-						typesetting industry. Lorem Ipsum has been the
-						industry's standard dummy text ever since the 1500s,
-						when an unknown printer took a galley of type and
-						scrambled it to make a type specimen book.
+					<p className="text-sm text-neutral-500">
+						Содержание, генерируемое искусственным интеллектом на
+						этой странице, носит информационный характер и может не
+						полностью соответствовать историческим или научно
+						подтверждённым фактам. Мы стремимся предоставлять
+						достоверную информацию, однако ИИ-системы имеют
+						ограничения в интерпретации и воспроизведении точных
+						исторических событий. Пожалуйста, используйте
+						предоставленные данные с критической оценкой и при
+						необходимости обращайтесь к авторитетным источникам.
 					</p>
 				</div>
 			</div>
 
 			<div className="mt-8 text-center text-sm text-gray-500">
-				Все права защищены ©Владелец
+				Все права защищены ©NKTKLN
 			</div>
 		</footer>
 	)
