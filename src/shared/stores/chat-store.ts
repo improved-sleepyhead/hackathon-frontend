@@ -1,5 +1,4 @@
 import { create } from 'zustand'
-import { v4 as uuidv4 } from 'uuid'
 
 type ChatContentType = 'audio' | 'image' | 'text'
 type ChatId = Exclude<string | null, null>
@@ -36,87 +35,95 @@ interface ChatResponse {
 interface ChatStoreState {
 	requestParams: MessageToAI
 	activeChatId: ChatId | null
-	messages: Map<ChatId, MessageState[]>
+	messages: ChatResponse[]
 	chatContentType: ContentTypeState
+	socket: WebSocket | null
 
 	setChatContentType: (type: ContentTypeState) => void
-	sendMessage: () => Promise<ChatResponse>
-	handleResponse: (response: ChatResponse) => void
+	sendMessage: () => Promise<void>
 	setActiveChat: (chatId: ChatId) => void
+	connectSocket: (token: string) => void
 }
 
 export const useChatStore = create<ChatStoreState>((set, get) => ({
 	chatContentType: { audio: false, text: false, image: false },
-	requestParams: {
-		body: ''
-	},
-
+	requestParams: { body: '' },
 	activeChatId: null,
-	messages: new Map(),
+	messages: [],
+	socket: null,
 
-	setChatContentType(type) {},
-
-	sendMessage: async () => {
-		const { requestParams, activeChatId, chatContentType } = get()
-		const chatId = activeChatId
-		const tempUserMessageId = Date.now()
-
-		const newMessage: MessageToAI = {
-			body: requestParams.body,
-			audio: chatContentType.audio,
-			image: chatContentType.image,
-			text: chatContentType.text
-        }
-        
-
-		set(state => ({
-			requestParams: { ...requestParams, body: '' },
-			activeChatId: chatId,
-			messages: new Map(state.messages).set(chatId, [
-				...(state.messages.get(chatId) || []),
-				newMessage
-			])
-		}))
-
-		return {
-			chatId,
-			aiAnswer: 'Generated content',
-			type: 'text',
-			userMessageId: tempUserMessageId,
-			aiMessageId: Date.now()
-		}
-	},
-
-	handleResponse: response => {
-		set(state => {
-			const chatMessages = state.messages.get(response.chatId) || []
-
-			const aiMessage: MessageState = {
-				id: response.aiMessageId,
-				chat_id: response.chatId,
-				body: response.aiAnswer,
-				type: response.type,
-				role: 'ai',
-				is_liked: false,
-				created_at: new Date().toISOString()
-			}
-
-			return {
-				messages: new Map(state.messages).set(
-					response.chatId,
-					chatMessages
-						.map(msg =>
-							msg.id === response.userMessageId
-								? { ...msg, id: response.userMessageId }
-								: msg
-						)
-						.concat(aiMessage)
-				)
-			}
+	setChatContentType: type => {
+		set({
+			chatContentType: type,
+			requestParams: { ...get().requestParams, ...type }
 		})
 	},
 
 	setActiveChat: chatId => {
 		set({ activeChatId: chatId })
+	},
+
+	connectSocket: token => {
+		const { activeChatId } = get()
+
+		const socket = new WebSocket(
+			`wss://yamata-no-orochi.nktkln.com/chats/ws/${token}`
+		)
+
+		socket.onopen = () => {
+			console.log('WebSocket открыт')
+		}
+
+		socket.onmessage = event => {
+			const data = JSON.parse(event.data)
+			console.log('WS сообщение:', data)
+
+			const response: ChatResponse = {
+				chatId: data.chat_id,
+				aiAnswer: data.ai_answer,
+				type: data.type,
+				userMessageId: data.user_message_id,
+				aiMessageId: data.ai_message_id
+			}
+
+			// Сохраняем activeChatId, если пришёл новый
+			if (!get().activeChatId) {
+				set({ activeChatId: data.chat_id })
+			}
+
+			set(state => ({
+				messages: [...state.messages, response]
+			}))
+		}
+
+		socket.onerror = e => {
+			console.error('Ошибка WebSocket', e)
+		}
+
+		socket.onclose = event => {
+			console.warn('WebSocket закрыт')
+			console.warn('Код:', event.code)
+			console.warn('Причина:', event.reason)
+		}
+
+		set({ socket })
+	},
+
+	sendMessage: async () => {
+		const { socket, requestParams, activeChatId } = get()
+
+		if (!socket || socket.readyState !== WebSocket.OPEN) {
+			console.warn('Сокет не готов')
+			return
+		}
+
+		const payload = {
+			...requestParams,
+			...(activeChatId ? {} : get().chatContentType) // только для нового чата
+		}
+
+		socket.send(JSON.stringify(payload))
+
+		set({ requestParams: { body: '' } }) // очищаем поле
 	}
 }))
