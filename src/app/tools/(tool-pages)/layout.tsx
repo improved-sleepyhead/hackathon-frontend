@@ -52,9 +52,9 @@ export default function ToolsPagesLayout({
 	}
 
 	return (
-		<>
+		<div className="overflow-hidden">
 			<ToolsNavigation />
 			{children}
-		</>
+		</div>
 	)
 }
