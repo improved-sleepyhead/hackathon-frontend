@@ -1,3 +1,5 @@
+import { FeedbackModal } from "@/features/feedback/components/feedback-modal"
+
 interface MarketingLayoutProps {
 	children: React.ReactNode
 }

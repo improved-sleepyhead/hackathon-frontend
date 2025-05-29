@@ -8,8 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/kit/card"
-import { Input } from "@/shared/ui/kit/input"
-import { Label } from "@/shared/ui/kit/label"
 import { ArrowRight, PlayIcon } from 'lucide-react'
 
 export const Music = () => {
@@ -18,7 +16,7 @@ export const Music = () => {
 			<div className="mb-6 flex w-full flex-col">
 				<div className="flex flex-col items-center justify-center px-4 text-center text-white">
 					<div className="mt-24 flex w-1/2 flex-col items-center">
-						<h2 className="text-xl font-bold md:text-4xl lg:text-5xl">
+						<h2 className="text-3xl font-bold md:text-4xl lg:text-5xl">
 							Библиотека музыки
 						</h2>
 						<p className="md:text-md mt-4 text-sm text-white/70">

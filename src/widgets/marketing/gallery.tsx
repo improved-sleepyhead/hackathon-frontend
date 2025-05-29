@@ -19,7 +19,7 @@ export const Gallery = () => {
 
 				<div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center text-white">
 					<div className="mt-20 flex w-2/3 flex-col items-center md:mt-24">
-						<h2 className="text-xl font-bold md:text-4xl lg:text-5xl">
+						<h2 className="text-3xl font-bold md:text-4xl lg:text-5xl">
 							Галерея
 						</h2>
 						<p className="md:text-md mt-4 text-sm text-white/70">

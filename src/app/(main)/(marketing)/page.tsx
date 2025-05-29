@@ -1,3 +1,4 @@
+import { Devs } from '@/widgets/marketing/devs'
 import { Footer } from '@/widgets/marketing/footer'
 import { Gallery } from '@/widgets/marketing/gallery'
 import { Music } from '@/widgets/marketing/music'
@@ -12,7 +13,7 @@ const MarketingPage = () => {
 			<Gallery />
 			<div className="flex w-full flex-col items-center bg-dark-main">
 				<Music />
-				{/* <Devs /> */}
+				<Devs />
 				<Footer />
 			</div>
 		</div>
