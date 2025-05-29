@@ -6,8 +6,7 @@ export default function ToolsLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<section className="bg-orange-main flex min-h-screen w-full flex-col items-center">
-			<Header />
+		<section className="flex min-h-screen w-full flex-col items-center">
 			<div className="w-full px-10">{children}</div>
 		</section>
 	)

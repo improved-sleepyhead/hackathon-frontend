@@ -97,6 +97,15 @@ body,
 	background-color: hsl(var(--dark-main));
 }
 
+.line-clamp-9 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 9;
+    line-clamp: 9;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
 @layer base {
 	* {
 		@apply border-border;

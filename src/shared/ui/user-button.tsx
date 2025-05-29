@@ -38,7 +38,7 @@ export const UserButton = () => {
 
 	const avatarFallback = email?.charAt(0).toUpperCase() ?? '?'
 	const displayEmail = email ?? 'Гость'
-	const accessLevel = email ? 'Полный доступ' : 'Макимум 20 генераций'
+	const accessLevel = email ? 'Полный доступ' : 'Максимум 20 генераций'
 
 	if (isLoading)
 		return (

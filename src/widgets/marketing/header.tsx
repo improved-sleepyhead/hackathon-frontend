@@ -10,14 +10,41 @@ import { Spinner } from '@/shared/ui/spinner'
 import { useMedia } from 'react-use'
 import { Sheet, SheetContent, SheetTrigger } from '@/shared/ui/kit/sheet'
 import { MenuIcon } from 'lucide-react'
+import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
 
 export const Header = () => {
 	const { isAuthenticated, isLoading } = useCurrentUser()
 	const pathname = usePathname()
-	const isDesktop = useMedia('(min-width: 1024px)', true)
+	const [isMounted, setIsMounted] = useState(false)
+    const isDesktop = useMedia('(min-width: 1024px)', false)
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, []);
+
+    if (!isMounted) {
+        return null
+    };
+	const headerClass = cn(
+		'flex h-full w-full items-center justify-between px-6 pb-6 pt-4 lg:px-20',
+		{
+			'bg-orange-main text-white': pathname === '/',
+			'bg-transparent text-black': pathname === '/letters' || pathname === '/stories' || pathname === '/tools',
+			'bg-dark-main text-white': pathname === '/music',
+			'bg-red-main text-white': pathname === '/galary',
+		}
+	);
+	const buttonClass = cn(
+		'text-base',
+		{
+			'text-white': pathname === '/' || pathname === '/music' || pathname === '/galary',
+			'text-black': pathname === '/letters' || pathname === '/stories' || pathname === '/tools',
+		}
+	);
 
 	return (
-		<div className="bg-orange-main flex h-full w-full items-center justify-between bg-transparent px-6 pb-6 pt-4 text-white lg:px-20">
+		<div className={headerClass}>
 			<div className="hidden lg:block">
 				<Logo />
 			</div>
@@ -32,7 +59,7 @@ export const Header = () => {
 								<Button
 									variant="header"
 									size={isActive ? 'active' : 'default'}
-									className="text-base text-white"
+									className={buttonClass}
 									key={item.href}
 								>
 									<Link href={fullHref}>{item.label}</Link>
@@ -54,6 +81,7 @@ export const Header = () => {
 
 								return (
 									<Button
+										type="submit"
 										variant="header"
 										size={isActive ? 'active' : 'default'}
 										className="text-base text-black"
