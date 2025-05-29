@@ -8,14 +8,12 @@ const MarketingPage = () => {
 	return (
 		<div className="-mt-2 flex w-full flex-col items-center">
 			<Soldier />
-			<div className="flex w-full flex-col items-center">
 			<WhiteBlock />
 			<Gallery />
-			</div>
 			<div className="flex w-full flex-col items-center bg-dark-main">
-			<Music />
-			{/* <Devs /> */}
-			<Footer />
+				<Music />
+				{/* <Devs /> */}
+				<Footer />
 			</div>
 		</div>
 	)
