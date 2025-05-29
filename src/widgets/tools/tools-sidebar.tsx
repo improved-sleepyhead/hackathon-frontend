@@ -4,15 +4,14 @@ import {
 	TooltipProvider,
 	TooltipTrigger
 } from '@/shared/ui/kit/tooltip'
-import { TOOLS } from './config'
 import { Button } from '@/shared/ui/kit/button'
+import { TOOLS } from './config'
 
 interface ToolsSidebarProps {
 	selectedTools: number[]
-	toggleTool: (id: number) => void
 }
 
-export function ToolsSidebar({ selectedTools, toggleTool }: ToolsSidebarProps) {
+export function ToolsSidebar({ selectedTools }: ToolsSidebarProps) {
 	return (
 		<aside className="w-96 border-l bg-white/95 backdrop-blur-sm">
 			<header className="border-b bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-5">
@@ -32,10 +31,7 @@ export function ToolsSidebar({ selectedTools, toggleTool }: ToolsSidebarProps) {
 											: 'ghost'
 									}
 									size="lg"
-									onClick={() => toggleTool(tool.id)}
-									className={`h-16 w-full justify-start space-x-4 transition-all ${
-										tool.color
-									} ${
+									className={`h-16 w-full justify-start space-x-4 transition-all ${tool.color} ${
 										selectedTools.includes(tool.id)
 											? 'scale-[99%] border-2 shadow-md'
 											: 'hover:scale-[98%] hover:border'
