@@ -66,7 +66,7 @@ export default function RootLayout({
 			>
 				<TanstackQueryProvider>
 					<Toaster position="bottom-center" />
-
+                    
 					{children}
 				</TanstackQueryProvider>
 			</body>

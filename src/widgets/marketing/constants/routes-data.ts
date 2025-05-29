@@ -17,6 +17,6 @@ export const routes = [
 	},
 	{
 		label: 'Генератор',
-		href: '/tools/music'
+		href: '/tools'
 	}
 ]
